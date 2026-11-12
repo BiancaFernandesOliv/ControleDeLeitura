@@ -1,8 +1,0 @@
-<Solution>
-  <Folder Name="/Backend/">
-    <Project Path="../SistemaControleLeitura.Application/SistemaControleLeitura.Application.csproj" />
-    <Project Path="../SistemaControleLeitura.Domain/SistemaControleLeitura.Domain.csproj" />
-    <Project Path="../SistemaControleLeitura.Infrastructure/SistemaControleLeitura.Infrastructure.csproj" />
-    <Project Path="SistemaControleLeitura.API.csproj" />
-  </Folder>
-</Solution>
