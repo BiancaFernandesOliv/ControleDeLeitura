@@ -1,25 +1,52 @@
-# 📖 Sistema de Controle de Leitura
+# 📚 Controle de Leitura
 
-## 🎯 Visão Geral e Objetivo
+Projeto pessoal de gerenciamento e acompanhamento de leituras, desenvolvido com C# e .NET 10. A proposta é organizar livros, registrar o progresso das leituras e acompanhar metas individuais.
 
-API REST desenvolvida em C# e .NET 10 para gerenciamento de leituras, permitindo organizar livros, acompanhar o histórico de leitura e monitorar metas anuais.
+## 🎯 Objetivo
 
-Projeto desenvolvido em squad como parte do desafio de **Desenvolvimento de APIs com .NET**.
+Desenvolver uma API REST para centralizar o gerenciamento da vida de leitura, permitindo que cada pessoa mantenha sua biblioteca organizada e acompanhe sua evolução ao longo do tempo.
 
-## 💻 Tecnologias Utilizadas
+## ✨ Funcionalidades planejadas
 
-- **Backend:** C#, .NET 10 e ASP.NET Core.
-- **Persistência:** Entity Framework Core.
-- **Documentação da API:** Swagger.
+- Cadastro e gerenciamento de livros.
+- Organização dos livros em uma estante pessoal.
+- Definição e atualização do status de leitura, como **Quero ler**, **Lendo** e **Lido**.
+- Registro e acompanhamento do progresso de cada leitura.
+- Definição de uma meta anual de leitura.
+- Acompanhamento do progresso em relação à meta anual.
 
-## 📁 Estrutura do Projeto
+> As funcionalidades serão implementadas gradualmente ao longo do desenvolvimento do projeto.
+
+## 🛠️ Tecnologias
+
+- **Linguagem:** C#
+- **Plataforma:** .NET 10 / ASP.NET Core
+- **Arquitetura:** API REST organizada em camadas
+- **Persistência:** Entity Framework Core
+- **Documentação da API:** Swagger / OpenAPI
+- **Versionamento:** Git e GitHub
+
+## 🏗️ Estrutura da solução
+
+A solução está organizada inicialmente nos seguintes projetos:
 
 ```text
 SistemaControleLeitura/
-└── Backend/
-    └── SistemaControleLeitura.API/
+├── SistemaControleLeitura.API/
+├── SistemaControleLeitura.Application/
+├── SistemaControleLeitura.Domain/
+└── SistemaControleLeitura.Infrastructure/
 ```
 
-## 👩‍💻 Integrantes e Contribuições
+- **API:** ponto de entrada HTTP, endpoints e configurações da aplicação.
+- **Application:** casos de uso, serviços, DTOs e contratos da aplicação.
+- **Domain:** entidades, enums e regras centrais do domínio.
+- **Infrastructure:** implementações de persistência e integrações externas.
 
-A definir.
+## 🚧 Status do projeto
+
+Em desenvolvimento. A estrutura inicial da solução foi criada e as funcionalidades serão adicionadas por etapas.
+
+## 👩‍💻 Autoria
+
+Projeto pessoal desenvolvido por Bianca Fernandes para praticar e aprofundar conhecimentos em desenvolvimento backend com .NET, APIs REST, persistência de dados e boas práticas de desenvolvimento.
