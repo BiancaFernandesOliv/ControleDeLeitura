@@ -2,22 +2,23 @@
     public class Livro {
 
         public Guid IdLivro { get; private set; } = Guid.NewGuid();
+        public Usuario Usuario { get; private set; }
         public string Titulo { get; private set; } = string.Empty;
         public string Autor { get; private set; } = string.Empty;
         public int NumeroPaginas { get; private set; }
-        public Usuario Usuario { get; private set; }
 
-        public Livro(string titulo, string autor, int numeroPaginas, Usuario usuario) {
 
+        public Livro(Usuario usuario, string titulo, string autor, int numeroPaginas) {
+
+            ValidarUsuario(usuario);
             ValidarTitulo(titulo);
             ValidarAutor(autor);
             ValidarNumeroPaginas(numeroPaginas);
-            ValidarUsuario(usuario);
 
+            Usuario = usuario;
             Titulo = titulo.Trim();
             Autor = autor.Trim();
             NumeroPaginas = numeroPaginas;
-            Usuario = usuario;
         }
 
         public void AlterarTitulo(string novoTitulo) {
@@ -40,6 +41,12 @@
             NumeroPaginas = novoNumeroPaginas;
         }
 
+        private static void ValidarUsuario(Usuario usuario) {
+            if (usuario is null) throw new ArgumentNullException(nameof(usuario), "Usuário informado é inválido.");
+
+            if (usuario.IdUsuario == Guid.Empty) throw new ArgumentException("O identificador do usuário é inválido.");
+        }
+
         private static void ValidarTitulo(string titulo) {
             if (string.IsNullOrWhiteSpace(titulo)) throw new ArgumentException("Nome informado é inválido.");
         }
@@ -54,12 +61,6 @@
 
         private static void ValidarNumeroPaginas(int numeroPaginas) {
             if (numeroPaginas <= 0) throw new ArgumentException("O número de páginas deve ser maior que zero.");
-        }
-
-        private static void ValidarUsuario(Usuario usuario) {
-            if (usuario is null) throw new ArgumentNullException(nameof(usuario), "Usuário informado é inválido.");
-
-            if (usuario.IdUsuario == Guid.Empty) throw new ArgumentException("O identificador do usuário é inválido.");
         }
     }
 }
