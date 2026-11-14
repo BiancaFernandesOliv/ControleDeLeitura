@@ -1,7 +1,8 @@
-﻿namespace SistemaControleLeitura.Domain.Models {
+﻿namespace SistemaControleLeitura.Domain.Entities {
     public class Livro {
 
         public Guid IdLivro { get; private set; } = Guid.NewGuid();
+        public Guid IdUsuario { get; private set; }
         public Usuario Usuario { get; private set; }
         public string Titulo { get; private set; } = string.Empty;
         public string Autor { get; private set; } = string.Empty;
@@ -15,6 +16,7 @@
             ValidarAutor(autor);
             ValidarNumeroPaginas(numeroPaginas);
 
+            IdUsuario = usuario.IdUsuario;
             Usuario = usuario;
             Titulo = titulo.Trim();
             Autor = autor.Trim();
@@ -49,10 +51,14 @@
 
         private static void ValidarTitulo(string titulo) {
             if (string.IsNullOrWhiteSpace(titulo)) throw new ArgumentException("Nome informado é inválido.");
+
+            if (titulo.Trim().Length < 2) throw new ArgumentException("O título deve ter pelo menos 2 caracteres.");
         }
 
         private static void ValidarAutor(string autor) {
             if (string.IsNullOrWhiteSpace(autor)) throw new ArgumentException("Nome informado é inválido.");
+
+            if (autor.Trim().Length < 2) throw new ArgumentException("O nome do autor deve ter pelo menos 2 caracteres.");
 
             if (!autor.Any(char.IsLetter)) throw new ArgumentException("O nome deve conter pelo menos uma letra.");
 

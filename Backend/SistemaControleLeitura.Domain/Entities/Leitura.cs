@@ -1,11 +1,12 @@
 ﻿using SistemaControleLeitura.Domain.Enums;
-using SistemaControleLeitura.Domain.Models;
 
 namespace SistemaControleLeitura.Domain.Entities {
     public class Leitura {
 
-        public Guid Id { get; private set; } = Guid.NewGuid();
+        public Guid IdLeitura { get; private set; } = Guid.NewGuid();
+        public Guid IdUsuario { get; private set; }
         public Usuario Usuario { get; private set; }
+        public Guid IdLivro { get; private set; }
         public Livro Livro { get; private set; }
         public StatusLeitura StatusLeitura { get; private set; } = StatusLeitura.QueroLer;
         public DateTime? DataInicio { get; private set; }
@@ -16,6 +17,8 @@ namespace SistemaControleLeitura.Domain.Entities {
             ValidarUsuario(usuario);
             ValidarLivro(livro);
 
+            IdUsuario = usuario.IdUsuario;
+            IdLivro = livro.IdLivro;
             Usuario = usuario;
             Livro = livro;
         }

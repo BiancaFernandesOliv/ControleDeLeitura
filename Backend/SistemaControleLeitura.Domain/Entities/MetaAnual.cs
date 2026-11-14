@@ -1,9 +1,8 @@
-﻿using SistemaControleLeitura.Domain.Models;
-
-namespace SistemaControleLeitura.Domain.Entities {
+﻿namespace SistemaControleLeitura.Domain.Entities {
     public class MetaAnual {
 
-        public Guid Id { get; private set; } = Guid.NewGuid();
+        public Guid IdMeta { get; private set; } = Guid.NewGuid();
+        public Guid IdUsuario { get; private set; }
         public Usuario Usuario { get; private set; }
         public int Ano {  get; private set; }
         public int MetaQuantidade { get; private set; }
@@ -14,6 +13,7 @@ namespace SistemaControleLeitura.Domain.Entities {
             ValidarAno(ano);
             ValidarMetaQuantidade(metaQuantidade);
 
+            IdUsuario = usuario.IdUsuario;
             Usuario = usuario;
             Ano = ano;
             MetaQuantidade = metaQuantidade;

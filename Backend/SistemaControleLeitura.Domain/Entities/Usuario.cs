@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SistemaControleLeitura.Domain.Models {
+namespace SistemaControleLeitura.Domain.Entities {
     public class Usuario {
 
         public Guid IdUsuario { get; private set; } = Guid.NewGuid();
