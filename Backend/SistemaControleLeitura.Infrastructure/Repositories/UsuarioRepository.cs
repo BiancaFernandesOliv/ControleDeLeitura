@@ -12,21 +12,21 @@ namespace SistemaControleLeitura.Infrastructure.Repositories {
             _context = context;
         }
 
-        public async Task AdicionarAsync(Usuario usuario, CancellationToken cancellationToken = default) {
+        public async Task CadastrarUsuarioAsync(Usuario usuario, CancellationToken cancellationToken = default) {
             
             _context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task AtualizarAsync(Usuario usuario, CancellationToken cancellationToken = default) {
+        public async Task AtualizarUsuarioAsync(Usuario usuario, CancellationToken cancellationToken = default) {
             
             _context.Usuarios.Update(usuario);
             await _context.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task ExcluirAsync(Guid idUsuario, CancellationToken cancellationToken = default) {
+        public async Task ExcluirUsuarioAsync(Guid idUsuario, CancellationToken cancellationToken = default) {
 
-            var usuario = await ObterPorIdAsync(idUsuario, cancellationToken);
+            var usuario = await ObterUsuarioPorIdAsync(idUsuario, cancellationToken);
 
             if (usuario == null) return;
 
@@ -39,12 +39,12 @@ namespace SistemaControleLeitura.Infrastructure.Repositories {
             return await _context.Usuarios.AnyAsync(u => u.Email == email, cancellationToken);
         }
 
-        public async Task<Usuario?> ObterPorEmailAsync(string email, CancellationToken cancellationToken = default) {
+        public async Task<Usuario?> ObterUsuarioPorEmailAsync(string email, CancellationToken cancellationToken = default) {
 
             return await _context.Usuarios.FirstOrDefaultAsync(usuario => usuario.Email == email, cancellationToken);
         }
 
-        public async Task<Usuario?> ObterPorIdAsync(Guid idUsuario, CancellationToken cancellationToken = default) {
+        public async Task<Usuario?> ObterUsuarioPorIdAsync(Guid idUsuario, CancellationToken cancellationToken = default) {
 
             return await _context.Usuarios.FirstOrDefaultAsync(usuario => usuario.IdUsuario == idUsuario, cancellationToken);
         }
