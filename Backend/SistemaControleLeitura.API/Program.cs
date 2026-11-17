@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SistemaControleLeitura.Application.Interfaces;
+using SistemaControleLeitura.Application.Services;
 using SistemaControleLeitura.Infrastructure.Data;
 using SistemaControleLeitura.Infrastructure.Repositories;
 
@@ -13,6 +14,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlite(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+builder.Services.AddScoped<IUsuarioService, UsuarioService>();
 
 var app = builder.Build();
 

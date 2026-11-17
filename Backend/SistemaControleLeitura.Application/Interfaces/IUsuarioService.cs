@@ -13,7 +13,5 @@ namespace SistemaControleLeitura.Application.Interfaces {
         Task<Usuario> AtualizarUsuarioAsync(Guid idUsuario, UsuarioAtualizacaoDto usuarioDto);
 
         Task ExcluirUsuarioAsync(Guid idUsuario);
-
-
     }
 }

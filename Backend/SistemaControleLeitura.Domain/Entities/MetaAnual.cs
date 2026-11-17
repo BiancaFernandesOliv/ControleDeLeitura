@@ -3,9 +3,11 @@
 
         public Guid IdMeta { get; private set; } = Guid.NewGuid();
         public Guid IdUsuario { get; private set; }
-        public Usuario Usuario { get; private set; }
+        public Usuario Usuario { get; private set; } = null!;
         public int Ano {  get; private set; }
         public int MetaQuantidade { get; private set; }
+
+        private MetaAnual() { }
 
         public MetaAnual(Usuario usuario, int ano, int metaQuantidade) {
 

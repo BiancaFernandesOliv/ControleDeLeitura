@@ -5,12 +5,14 @@ namespace SistemaControleLeitura.Domain.Entities {
 
         public Guid IdLeitura { get; private set; } = Guid.NewGuid();
         public Guid IdUsuario { get; private set; }
-        public Usuario Usuario { get; private set; }
+        public Usuario Usuario { get; private set; } = null!;
         public Guid IdLivro { get; private set; }
-        public Livro Livro { get; private set; }
+        public Livro Livro { get; private set; } = null!;
         public StatusLeitura StatusLeitura { get; private set; } = StatusLeitura.QueroLer;
         public DateTime? DataInicio { get; private set; }
         public DateTime? DataTermino { get; private set; }
+
+        private Leitura() { }
 
         public Leitura(Usuario usuario, Livro livro) {
 

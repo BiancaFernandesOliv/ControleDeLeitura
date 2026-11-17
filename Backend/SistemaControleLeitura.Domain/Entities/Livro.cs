@@ -3,11 +3,12 @@
 
         public Guid IdLivro { get; private set; } = Guid.NewGuid();
         public Guid IdUsuario { get; private set; }
-        public Usuario Usuario { get; private set; }
+        public Usuario Usuario { get; private set; } = null!;
         public string Titulo { get; private set; } = string.Empty;
         public string Autor { get; private set; } = string.Empty;
         public int NumeroPaginas { get; private set; }
 
+        private Livro() { }
 
         public Livro(Usuario usuario, string titulo, string autor, int numeroPaginas) {
 
