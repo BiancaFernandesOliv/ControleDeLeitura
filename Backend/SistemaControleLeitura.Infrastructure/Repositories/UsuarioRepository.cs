@@ -2,6 +2,7 @@
 using SistemaControleLeitura.Application.Interfaces;
 using SistemaControleLeitura.Domain.Entities;
 using SistemaControleLeitura.Infrastructure.Data;
+using System.Collections;
 
 namespace SistemaControleLeitura.Infrastructure.Repositories {
     public class UsuarioRepository : IUsuarioRepository {
@@ -13,13 +14,13 @@ namespace SistemaControleLeitura.Infrastructure.Repositories {
         }
 
         public async Task CadastrarUsuarioAsync(Usuario usuario, CancellationToken cancellationToken = default) {
-            
+
             _context.Usuarios.Add(usuario);
             await _context.SaveChangesAsync(cancellationToken);
         }
 
         public async Task AtualizarUsuarioAsync(Usuario usuario, CancellationToken cancellationToken = default) {
-            
+
             _context.Usuarios.Update(usuario);
             await _context.SaveChangesAsync(cancellationToken);
         }
@@ -39,14 +40,21 @@ namespace SistemaControleLeitura.Infrastructure.Repositories {
             return await _context.Usuarios.AnyAsync(u => u.Email == email, cancellationToken);
         }
 
+        public async Task<Usuario?> ObterUsuarioPorIdAsync(Guid idUsuario, CancellationToken cancellationToken = default) {
+
+            return await _context.Usuarios.FirstOrDefaultAsync(usuario => usuario.IdUsuario == idUsuario, cancellationToken);
+        }
+
         public async Task<Usuario?> ObterUsuarioPorEmailAsync(string email, CancellationToken cancellationToken = default) {
 
             return await _context.Usuarios.FirstOrDefaultAsync(usuario => usuario.Email == email, cancellationToken);
         }
 
-        public async Task<Usuario?> ObterUsuarioPorIdAsync(Guid idUsuario, CancellationToken cancellationToken = default) {
+        public async Task<IEnumerable<Usuario>> ObterUsuariosAsync(CancellationToken cancellationToken = default) {
 
-            return await _context.Usuarios.FirstOrDefaultAsync(usuario => usuario.IdUsuario == idUsuario, cancellationToken);
+            return await _context.Usuarios
+                .AsNoTracking()
+                .ToListAsync(cancellationToken);
         }
     }
 }

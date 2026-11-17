@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SistemaControleLeitura.Application.DTOs;
 using SistemaControleLeitura.Application.Interfaces;
+using SistemaControleLeitura.Domain.Entities;
 
 namespace SistemaControleLeitura.API.Controllers {
 
@@ -118,6 +119,37 @@ namespace SistemaControleLeitura.API.Controllers {
             }
         }
 
+        [HttpGet("{idUsuario:guid}")]
+        public async Task<IActionResult> ObterUsuarioPorIdAsync(Guid idUsuario) {
+
+            var usuario = await _usuarioService.ObterUsuarioPorIdAsync(idUsuario);
+
+            if (usuario == null) {
+
+                var resposta = new RespostaPadraoDto {
+                    Sucesso = false,
+                    Mensagem = "Usuário não encontrado."
+                };
+
+                return NotFound(resposta);
+            }
+
+            var respostaUsuario = new UsuarioRespostaDto {
+                Id = usuario.IdUsuario,
+                Nome = usuario.Nome,
+                Email = usuario.Email
+            };
+
+            var respostaPadrao = new RespostaPadraoDto {
+                Sucesso = true,
+                Mensagem = "Usuário encontrado.",
+                Dados = respostaUsuario
+            };
+
+            return Ok(respostaPadrao);
+
+        }
+
         [HttpGet("email/{email}")]
         public async Task<IActionResult> ObterUsuarioPorEmailAsync(string email) {
 
@@ -136,36 +168,6 @@ namespace SistemaControleLeitura.API.Controllers {
             var respostaUsuario = new UsuarioRespostaDto {
                 Id = usuario.IdUsuario,
                 Nome = usuario.Nome,
-                Email = email
-            };
-
-            var respostaPadrao = new RespostaPadraoDto {
-                Sucesso = true,
-                Mensagem = "Usuário encontrado.",
-                Dados = respostaUsuario
-            };
-
-            return Ok(respostaPadrao);
-        }
-
-        [HttpGet("{idUsuario:guid}")]
-        public async Task<IActionResult> ObterUsuarioPorIdAsync(Guid idUsuario) {
-
-            var usuario = await _usuarioService.ObterUsuarioPorIdAsync(idUsuario);
-
-            if (usuario == null) {
-
-                var resposta = new RespostaPadraoDto {
-                    Sucesso = false,
-                    Mensagem = "Usuário não encontrado."
-                };
-
-                return NotFound(resposta);
-            }
-
-            var respostaUsuario = new UsuarioRespostaDto {
-                Id = idUsuario,
-                Nome = usuario.Nome,
                 Email = usuario.Email
             };
 
@@ -176,9 +178,37 @@ namespace SistemaControleLeitura.API.Controllers {
             };
 
             return Ok(respostaPadrao);
-
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ObterUsuariosAsync() {
+
+            var usuarios = await _usuarioService.ObterUsuariosAsync();
+
+            if (!usuarios.Any()) {
+                var respostaVazia = new RespostaPadraoDto {
+                    Sucesso = true,
+                    Mensagem = "Nenhum usuário cadastrado.",
+                    Dados = new List<UsuarioRespostaDto>()
+                };
+
+                return Ok(respostaVazia);
+            }
+
+            var usuariosResposta = usuarios.Select(usuario => new UsuarioRespostaDto {
+                Id = usuario.IdUsuario,
+                Nome = usuario.Nome,
+                Email = usuario.Email
+            });
+
+            var respostaPadrao = new RespostaPadraoDto {
+                Sucesso = true,
+                Mensagem = "Usuários encontrados.",
+                Dados = usuariosResposta
+            };
+
+            return Ok(respostaPadrao);
+        }
     }
 }
 

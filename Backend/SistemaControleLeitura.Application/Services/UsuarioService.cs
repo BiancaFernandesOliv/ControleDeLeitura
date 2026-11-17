@@ -68,14 +68,19 @@ namespace SistemaControleLeitura.Application.Services {
             await _usuarioRepository.ExcluirUsuarioAsync(idUsuario);
         }
 
+        public async Task<Usuario?> ObterUsuarioPorIdAsync(Guid idUsuario) {
+
+            return await _usuarioRepository.ObterUsuarioPorIdAsync(idUsuario);
+        }
+
         public async Task<Usuario?> ObterUsuarioPorEmailAsync(string email) {
 
             return await _usuarioRepository.ObterUsuarioPorEmailAsync(email);
         }
 
-        public async Task<Usuario?> ObterUsuarioPorIdAsync(Guid idUsuario) {
+        public async Task<IEnumerable<Usuario>> ObterUsuariosAsync() {
 
-            return await _usuarioRepository.ObterUsuarioPorIdAsync(idUsuario);
+            return await _usuarioRepository.ObterUsuariosAsync();
         }
     }
 }
