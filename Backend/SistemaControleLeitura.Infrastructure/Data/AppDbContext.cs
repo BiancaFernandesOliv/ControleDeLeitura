@@ -7,10 +7,10 @@ public class AppDbContext : DbContext {
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
-    public DbSet<Usuario> Usuarios { get; private set; }
-    public DbSet<Livro> Livros { get; private set; }
-    public DbSet<Leitura> Leituras { get; private set; }
-    public DbSet<MetaAnual> MetasAnuais { get; private set; }
+    public DbSet<Usuario> Usuarios { get; set; }
+    public DbSet<Livro> Livros { get; set; }
+    public DbSet<Leitura> Leituras { get; set; }
+    public DbSet<MetaAnual> MetasAnuais { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         base.OnModelCreating(modelBuilder);
@@ -55,7 +55,7 @@ public class AppDbContext : DbContext {
             .WithMany()
             .HasForeignKey(p => p.IdUsuario)
             .IsRequired();
-            entity.HasIndex(p => new { p.IdUsuario, p.Ano }).IsUnique(); entity.HasIndex(p => new { p.IdUsuario, p.Ano }).IsUnique();
+            entity.HasIndex(p => new { p.IdUsuario, p.Ano }).IsUnique(); 
         });
     }
 }

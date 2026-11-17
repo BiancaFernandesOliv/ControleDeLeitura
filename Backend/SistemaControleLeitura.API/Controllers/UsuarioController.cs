@@ -22,11 +22,7 @@ namespace SistemaControleLeitura.API.Controllers {
 
                 var usuarioCriado = await _usuarioService.CadastrarUsuarioAsync(usuarioDto);
 
-                var resposta = new UsuarioRespostaDto {
-                    Id = usuarioCriado.IdUsuario,
-                    Nome = usuarioCriado.Nome,
-                    Email = usuarioCriado.Email
-                };
+                var resposta = MapearParaResposta(usuarioCriado);
 
                 var respostaPadrao = new RespostaPadraoDto {
                     Sucesso = true,
@@ -58,11 +54,7 @@ namespace SistemaControleLeitura.API.Controllers {
 
                 var usuarioAtualizado = await _usuarioService.AtualizarUsuarioAsync(idUsuario, usuarioDto);
 
-                var resposta = new UsuarioRespostaDto {
-                    Id = usuarioAtualizado.IdUsuario,
-                    Nome = usuarioAtualizado.Nome,
-                    Email = usuarioAtualizado.Email
-                };
+                var resposta = MapearParaResposta(usuarioAtualizado);
 
                 var respostaPadrao = new RespostaPadraoDto {
                     Sucesso = true,
@@ -134,11 +126,7 @@ namespace SistemaControleLeitura.API.Controllers {
                 return NotFound(resposta);
             }
 
-            var respostaUsuario = new UsuarioRespostaDto {
-                Id = usuario.IdUsuario,
-                Nome = usuario.Nome,
-                Email = usuario.Email
-            };
+            var respostaUsuario = MapearParaResposta(usuario);
 
             var respostaPadrao = new RespostaPadraoDto {
                 Sucesso = true,
@@ -165,11 +153,7 @@ namespace SistemaControleLeitura.API.Controllers {
                 return NotFound(resposta);
             }
 
-            var respostaUsuario = new UsuarioRespostaDto {
-                Id = usuario.IdUsuario,
-                Nome = usuario.Nome,
-                Email = usuario.Email
-            };
+            var respostaUsuario = MapearParaResposta(usuario);
 
             var respostaPadrao = new RespostaPadraoDto {
                 Sucesso = true,
@@ -195,11 +179,7 @@ namespace SistemaControleLeitura.API.Controllers {
                 return Ok(respostaVazia);
             }
 
-            var usuariosResposta = usuarios.Select(usuario => new UsuarioRespostaDto {
-                Id = usuario.IdUsuario,
-                Nome = usuario.Nome,
-                Email = usuario.Email
-            });
+            var usuariosResposta = usuarios.Select(MapearParaResposta);
 
             var respostaPadrao = new RespostaPadraoDto {
                 Sucesso = true,
@@ -208,6 +188,14 @@ namespace SistemaControleLeitura.API.Controllers {
             };
 
             return Ok(respostaPadrao);
+        }
+        private static UsuarioRespostaDto MapearParaResposta(Usuario usuario) {
+
+            return new UsuarioRespostaDto {
+                Id = usuario.IdUsuario,
+                Nome = usuario.Nome,
+                Email = usuario.Email
+            };
         }
     }
 }

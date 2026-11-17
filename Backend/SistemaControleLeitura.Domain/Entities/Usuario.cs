@@ -20,6 +20,9 @@ namespace SistemaControleLeitura.Domain.Entities {
         }
 
         public void AlterarNome(string novoNome) {
+
+            if (novoNome == null) throw new ArgumentException("Nome informado é inválido.");
+
             novoNome = novoNome.Trim();
 
             ValidarNome(novoNome);
@@ -27,6 +30,9 @@ namespace SistemaControleLeitura.Domain.Entities {
         }
 
         public void AlterarEmail(string novoEmail) {
+
+            if (novoEmail == null) throw new ArgumentException("Nome informado é inválido.");
+            
             novoEmail = novoEmail.Trim();
 
             ValidarEmail(novoEmail);

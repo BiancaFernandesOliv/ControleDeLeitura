@@ -51,13 +51,13 @@
         }
 
         private static void ValidarTitulo(string titulo) {
-            if (string.IsNullOrWhiteSpace(titulo)) throw new ArgumentException("Nome informado é inválido.");
+            if (string.IsNullOrWhiteSpace(titulo)) throw new ArgumentException("Título informado é inválido.");
 
-            if (titulo.Trim().Length < 2) throw new ArgumentException("O título deve ter pelo menos 2 caracteres.");
+            if (titulo.Trim().Length < 2 && titulo.Trim().Length > 120) throw new ArgumentException("O título deve ter entre 2 e 120 caracteres.");
         }
 
         private static void ValidarAutor(string autor) {
-            if (string.IsNullOrWhiteSpace(autor)) throw new ArgumentException("Nome informado é inválido.");
+            if (string.IsNullOrWhiteSpace(autor)) throw new ArgumentException("Autor informado é inválido.");
 
             if (autor.Trim().Length < 2) throw new ArgumentException("O nome do autor deve ter pelo menos 2 caracteres.");
 

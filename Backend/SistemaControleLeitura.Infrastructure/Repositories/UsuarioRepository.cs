@@ -2,7 +2,6 @@
 using SistemaControleLeitura.Application.Interfaces;
 using SistemaControleLeitura.Domain.Entities;
 using SistemaControleLeitura.Infrastructure.Data;
-using System.Collections;
 
 namespace SistemaControleLeitura.Infrastructure.Repositories {
     public class UsuarioRepository : IUsuarioRepository {

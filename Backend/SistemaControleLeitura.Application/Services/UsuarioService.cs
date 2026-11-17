@@ -36,23 +36,40 @@ namespace SistemaControleLeitura.Application.Services {
 
         public async Task<Usuario> AtualizarUsuarioAsync(Guid idUsuario, UsuarioAtualizacaoDto usuarioDto) {
 
+            if (string.IsNullOrWhiteSpace(usuarioDto.Nome) &&
+                string.IsNullOrWhiteSpace(usuarioDto.Email) &&
+                string.IsNullOrWhiteSpace(usuarioDto.Senha)) {
+                throw new ArgumentException("Informe pelo menos um campo para atualizar.");
+            }
+
             var usuario = await _usuarioRepository.ObterUsuarioPorIdAsync(idUsuario);
 
             if (usuario == null) throw new ArgumentException("Usuário não encontrado.");
 
-            usuario.AlterarNome(usuarioDto.Nome);
+            if (usuarioDto.Nome != null) {
 
-            var email = usuarioDto.Email.Trim();
+                usuario.AlterarNome(usuarioDto.Nome);
+            }
 
-            var usuarioComEmail = await _usuarioRepository.ObterUsuarioPorEmailAsync(email);
+            if (usuarioDto.Email != null) {
 
-            if (usuarioComEmail != null && usuarioComEmail.IdUsuario != idUsuario) throw new ArgumentException("E-mail já cadastrado.");
+                var email = usuarioDto.Email.Trim();
 
-            usuario.AlterarEmail(email);
+                var usuarioComEmail = await _usuarioRepository.ObterUsuarioPorEmailAsync(email);
 
-            var senhaHash = _passwordHasher.HashPassword(null!, usuarioDto.Senha);
+                if (usuarioComEmail != null && usuarioComEmail.IdUsuario != idUsuario)
+                    throw new ArgumentException("E-mail já cadastrado.");
 
-            usuario.AlterarSenhaHash(senhaHash);
+                usuario.AlterarEmail(email);
+            }
+
+            if (usuarioDto.Senha != null) {
+
+                var senhaHash = _passwordHasher.HashPassword(null!, usuarioDto.Senha);
+
+                usuario.AlterarSenhaHash(senhaHash);
+            }
+
 
             await _usuarioRepository.AtualizarUsuarioAsync(usuario);
 
