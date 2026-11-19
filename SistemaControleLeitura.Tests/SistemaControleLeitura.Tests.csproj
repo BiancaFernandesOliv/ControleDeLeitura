@@ -28,7 +28,6 @@
   <ItemGroup>
     <Folder Include="API\" />
     <Folder Include="Infrastructure\" />
-    <Folder Include="Domain\" />
   </ItemGroup>
 
 </Project>

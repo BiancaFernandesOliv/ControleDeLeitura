@@ -31,7 +31,7 @@ namespace SistemaControleLeitura.Domain.Entities {
 
         public void AlterarEmail(string novoEmail) {
 
-            if (novoEmail == null) throw new ArgumentException("Nome informado é inválido.");
+            if (novoEmail == null) throw new ArgumentException("Email informado é inválido.");
             
             novoEmail = novoEmail.Trim();
 
@@ -53,9 +53,9 @@ namespace SistemaControleLeitura.Domain.Entities {
         }
 
         private static void ValidarEmail(string email) {
-            if (string.IsNullOrWhiteSpace(email)) throw new ArgumentException("E-mail informado é inválido.");
+            if (string.IsNullOrWhiteSpace(email)) throw new ArgumentException("Email informado é inválido.");
 
-            if (!new EmailAddressAttribute().IsValid(email)) throw new ArgumentException("E-mail informado é inválido.");
+            if (!new EmailAddressAttribute().IsValid(email)) throw new ArgumentException("Email informado é inválido.");
         }
 
         private static void ValidarSenhaHash(string senhaHash) {
