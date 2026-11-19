@@ -22,7 +22,7 @@ namespace SistemaControleLeitura.API.Controllers {
 
                 var usuarioCriado = await _usuarioService.CadastrarUsuarioAsync(usuarioDto);
 
-                var resposta = MapearParaResposta(usuarioCriado);
+                var resposta = UsuarioResposta(usuarioCriado);
 
                 var respostaPadrao = new RespostaPadraoDto {
                     Sucesso = true,
@@ -54,7 +54,7 @@ namespace SistemaControleLeitura.API.Controllers {
 
                 var usuarioAtualizado = await _usuarioService.AtualizarUsuarioAsync(idUsuario, usuarioDto);
 
-                var resposta = MapearParaResposta(usuarioAtualizado);
+                var resposta = UsuarioResposta(usuarioAtualizado);
 
                 var respostaPadrao = new RespostaPadraoDto {
                     Sucesso = true,
@@ -126,7 +126,7 @@ namespace SistemaControleLeitura.API.Controllers {
                 return NotFound(resposta);
             }
 
-            var respostaUsuario = MapearParaResposta(usuario);
+            var respostaUsuario = UsuarioResposta(usuario);
 
             var respostaPadrao = new RespostaPadraoDto {
                 Sucesso = true,
@@ -153,7 +153,7 @@ namespace SistemaControleLeitura.API.Controllers {
                 return NotFound(resposta);
             }
 
-            var respostaUsuario = MapearParaResposta(usuario);
+            var respostaUsuario = UsuarioResposta(usuario);
 
             var respostaPadrao = new RespostaPadraoDto {
                 Sucesso = true,
@@ -179,7 +179,7 @@ namespace SistemaControleLeitura.API.Controllers {
                 return Ok(respostaVazia);
             }
 
-            var usuariosResposta = usuarios.Select(MapearParaResposta);
+            var usuariosResposta = usuarios.Select(UsuarioResposta);
 
             var respostaPadrao = new RespostaPadraoDto {
                 Sucesso = true,
@@ -189,7 +189,7 @@ namespace SistemaControleLeitura.API.Controllers {
 
             return Ok(respostaPadrao);
         }
-        private static UsuarioRespostaDto MapearParaResposta(Usuario usuario) {
+        private static UsuarioRespostaDto UsuarioResposta(Usuario usuario) {
 
             return new UsuarioRespostaDto {
                 Id = usuario.IdUsuario,

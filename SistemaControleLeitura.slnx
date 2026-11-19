@@ -5,4 +5,5 @@
     <Project Path="Backend/SistemaControleLeitura.Domain/SistemaControleLeitura.Domain.csproj" />
     <Project Path="Backend/SistemaControleLeitura.Infrastructure/SistemaControleLeitura.Infrastructure.csproj" />
   </Folder>
+  <Project Path="SistemaControleLeitura.Tests/SistemaControleLeitura.Tests.csproj" />
 </Solution>
